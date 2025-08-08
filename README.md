@@ -36,21 +36,21 @@ Aplikasi ini memudahkan pengguna untuk:
 | Kategori       | Teknologi |
 |----------------|-----------|
 | Bahasa         | PHP Native |
+| Server Lokal   | XAMPP |
+
 | Database       | MySQL |
 | Frontend       | HTML, CSS, JavaScript |
 | Tools          | VS Code, Git, GitHub |
-| Server Lokal   | XAMPP |
-
 ---
 
 ## 👥 Tim Pengembang
-| Nama Anggota | Peran |
-|--------------|-------|
-| 👤 Anggota 1 | Frontend Developer |
-| 👤 Anggota 2 | Backend Developer |
-| 👤 Anggota 3 | Database Engineer |
-| 👤 Anggota 4 | UI/UX Designer |
-| 👤 Anggota 5 | Project Manager |
+| Nama Anggota | Peran                         |
+|--------------|----------------------------   |
+| 👤 Fahridzal nur Sidiq | Frontend Developer |
+| 👤 Ahmad Farhannudin   | Backend Developer  |
+| 👤 M Dafa Dwi Saputra  | Database Engineer  |
+| 👤 Zul Fikri Nugroho   | UI/UX Designer     |
+| 👤 Mohammad Rifaldy    | Project Manager    |
 
 ---
 
@@ -79,9 +79,6 @@ Pastikan Apache & MySQL di XAMPP sudah aktif.
 
 Buka browser dan akses:
 
-arduino
-Copy
-Edit
 http://localhost/project-oxigen
 Registrasi akun dan mulai latihan 💪
 
@@ -90,7 +87,7 @@ Registrasi akun dan mulai latihan 💪
 📜 Lisensi
 Project ini dikembangkan untuk Event SuperGame 2 dan bersifat non-commercial.
 
-<p align="center"> <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=24&pause=1000&color=00FF00&center=true&vCenter=true&width=500&lines=Stay+Strong+💪;Keep+Coding+👨‍💻;Push+Your+Limits+🔥" alt="Typing Animation" /> </p> ```
 
 # Aktifkan Apache dan MySQL
+
 
