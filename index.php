@@ -339,7 +339,7 @@
                     fetchNutrition('barcode', match[0]);
                   });
                 } else {
-                  setTimeout(runOCRLoop, 1500); // OCR ulang setiap 1.5 detik
+                  setTimeout(runOCRLoop, 1500);  
                 }
               })
               .catch(err => {
