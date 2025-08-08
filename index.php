@@ -272,67 +272,92 @@
     }
 
     function startScan() {
-      if (isScanning) return;
-      isScanning = true;
-      html5QrCode = new Html5Qrcode("reader");
+  if (isScanning) return;
+  isScanning = true;
+  html5QrCode = new Html5Qrcode("reader");
 
-      Html5Qrcode.getCameras().then(cameras => {
-        if (cameras && cameras.length) {
-          currentCameraId = cameras[0].id;
+  Html5Qrcode.getCameras().then(cameras => {
+    if (cameras && cameras.length) {
+      currentCameraId = cameras[0].id;
 
-          html5QrCode.start(
-            { deviceId: { exact: currentCameraId } },
-            {
-              fps: 30,
-              qrbox: { width: 300, height: 150 },
-              formatsToSupport: [
-                Html5QrcodeSupportedFormats.QR_CODE,
-                Html5QrcodeSupportedFormats.EAN_13,
-                Html5QrcodeSupportedFormats.EAN_8,
-                Html5QrcodeSupportedFormats.UPC_A,
-                Html5QrcodeSupportedFormats.UPC_E,
-                Html5QrcodeSupportedFormats.CODE_128,
-                Html5QrcodeSupportedFormats.CODE_39,
-                Html5QrcodeSupportedFormats.ITF,
-                Html5QrcodeSupportedFormats.CODABAR
-              ]
-            },
-            (decodedText, decodedResult) => {
-              html5QrCode.stop().then(() => {
-                isScanning = false;
-                playBeep();
-                fetchNutrition('barcode', decodedText);
-              });
-            },
-            (error) => {
-              // silent error
-            }
-          );
-
-          // juga tampilkan video untuk OCR
-          navigator.mediaDevices.getUserMedia({ video: { deviceId: currentCameraId } })
-            .then(stream => {
-              const videoElement = document.getElementById("ocr-video");
-              videoElement.srcObject = stream;
-              videoElement.onloadedmetadata = () => {
-                videoElement.play();
-                setTimeout(() => {
-                  if (isScanning) {
-                    html5QrCode.stop().then(() => {
-                      isScanning = false;
-                      tryOCR();
-                    });
-                  }
-                }, 5000); // OCR dijalankan setelah 5 detik
-              };
-            });
-        } else {
-          resultDiv.innerHTML = "<p>❌ Kamera tidak tersedia.</p>";
+      // Mulai barcode scanner
+      html5QrCode.start(
+        { deviceId: { exact: currentCameraId } },
+        {
+          fps: 30,
+          qrbox: { width: 300, height: 150 },
+          formatsToSupport: [
+            Html5QrcodeSupportedFormats.QR_CODE,
+            Html5QrcodeSupportedFormats.EAN_13,
+            Html5QrcodeSupportedFormats.EAN_8,
+            Html5QrcodeSupportedFormats.UPC_A,
+            Html5QrcodeSupportedFormats.UPC_E,
+            Html5QrcodeSupportedFormats.CODE_128,
+            Html5QrcodeSupportedFormats.CODE_39,
+            Html5QrcodeSupportedFormats.ITF,
+            Html5QrcodeSupportedFormats.CODABAR
+          ]
+        },
+        (decodedText, decodedResult) => {
+          if (!isScanning) return;
+          isScanning = false;
+          html5QrCode.stop().then(() => {
+            playBeep();
+            fetchNutrition('barcode', decodedText);
+          });
+        },
+        (error) => {
+          // silent error
         }
-      }).catch(err => {
-        resultDiv.innerHTML = `<p>❌ Gagal mengakses kamera: ${err.message}</p>`;
-      });
+      );
+
+      // Jalankan OCR paralel dari video
+      navigator.mediaDevices.getUserMedia({ video: { deviceId: currentCameraId } })
+        .then(stream => {
+          const videoElement = document.getElementById("ocr-video");
+          videoElement.srcObject = stream;
+          videoElement.play();
+
+          const canvas = document.getElementById('ocr-canvas');
+          const ctx = canvas.getContext('2d');
+
+          function runOCRLoop() {
+            if (!isScanning) return;
+
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
+            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL("image/png");
+
+            Tesseract.recognize(imageData, 'eng')
+              .then(result => {
+                const text = result.data.text;
+                const match = text.match(/\d{8,13}/);
+                if (match && isScanning) {
+                  isScanning = false;
+                  html5QrCode.stop().then(() => {
+                    fetchNutrition('barcode', match[0]);
+                  });
+                } else {
+                  setTimeout(runOCRLoop, 1500); // OCR ulang setiap 1.5 detik
+                }
+              })
+              .catch(err => {
+                console.error("OCR error:", err);
+                setTimeout(runOCRLoop, 1500);
+              });
+          }
+
+          runOCRLoop(); // mulai OCR loop
+        });
+    } else {
+      resultDiv.innerHTML = "<p>❌ Kamera tidak tersedia.</p>";
     }
+  }).catch(err => {
+    resultDiv.innerHTML = `<p>❌ Gagal mengakses kamera: ${err.message}</p>`;
+  });
+}
+
 
     function restartScan() {
       resultDiv.innerHTML = "";
