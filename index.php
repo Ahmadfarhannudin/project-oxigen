@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>ANOMALI SCAN</title>
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -96,20 +97,9 @@
       text-align: center;
     }
 
-    .ideal {
-      color: green;
-      font-weight: bold;
-    }
-
-    .warning {
-      color: orange;
-      font-weight: bold;
-    }
-
-    .danger {
-      color: red;
-      font-weight: bold;
-    }
+    .ideal { color: green; font-weight: bold; }
+    .warning { color: orange; font-weight: bold; }
+    .danger { color: red; font-weight: bold; }
 
     @media (max-width: 600px) {
       #result {
@@ -117,12 +107,18 @@
         align-items: center;
       }
     }
+
+    #ocr-video, #ocr-canvas {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
   <h2>📷 Scan Barcode Produk</h2>
   <div id="reader"></div>
+  <video id="ocr-video" width="300" autoplay muted playsinline></video>
+  <canvas id="ocr-canvas"></canvas>
 
   <h3>🔎 Cari Manual</h3>
   <p>Masukkan <strong>Barcode</strong>:</p>
@@ -149,16 +145,15 @@
     }
 
     function checkLevel(nutrient, value) {
-  if (nutrient === 'protein') {
-    return value >= 10 ? { text: '✅ Ideal', class: 'ideal' } : { text: '⚠️ Kurang', class: 'warning' };
-  } else if (nutrient === 'carbohydrates') {
-    return value <= 25 ? { text: '✅ Ideal', class: 'ideal' } : { text: '❌ Berlebih', class: 'danger' };
-  } else if (nutrient === 'sugar' || nutrient === 'sugars') {
-    return value <= 5 ? { text: '✅ Ideal', class: 'ideal' } : { text: '❌ Berlebih', class: 'danger' };
-  }
-  return { text: '', class: '' };
-}
-
+      if (nutrient === 'protein') {
+        return value >= 10 ? { text: '✅ Ideal', class: 'ideal' } : { text: '⚠️ Kurang', class: 'warning' };
+      } else if (nutrient === 'carbohydrates') {
+        return value <= 25 ? { text: '✅ Ideal', class: 'ideal' } : { text: '❌ Berlebih', class: 'danger' };
+      } else if (nutrient === 'sugar' || nutrient === 'sugars') {
+        return value <= 5 ? { text: '✅ Ideal', class: 'ideal' } : { text: '❌ Berlebih', class: 'danger' };
+      }
+      return { text: '', class: '' };
+    }
 
     function displayNutrition(data) {
       if (!data || data.error) {
@@ -178,29 +173,28 @@
 
         let nutrientLines = "";
         for (const key in n) {
-  const value = n[key];
-  if (typeof value === "string" || typeof value === "number") {
-    let comparison = "";
-    let compClass = "";
-    const keyLower = key.toLowerCase();
+          const value = n[key];
+          if (typeof value === "string" || typeof value === "number") {
+            let comparison = "";
+            let compClass = "";
+            const keyLower = key.toLowerCase();
 
-    if (['protein', 'carbohydrates', 'sugar', 'sugars'].includes(keyLower)) {
-      const numVal = parseFloat(value);
-      if (!isNaN(numVal)) {
-        const result = checkLevel(keyLower, numVal);
-        comparison = result.text;
-        compClass = result.class;
-      }
-    }
+            if (['protein', 'carbohydrates', 'sugar', 'sugars'].includes(keyLower)) {
+              const numVal = parseFloat(value);
+              if (!isNaN(numVal)) {
+                const result = checkLevel(keyLower, numVal);
+                comparison = result.text;
+                compClass = result.class;
+              }
+            }
 
-    nutrientLines += `
-      <div class="line">
-        <strong>${key}</strong>: ${value} ${comparison ? `<span class="${compClass}">(${comparison})</span>` : ""}
-      </div>
-    `;
-  }
-}
-
+            nutrientLines += `
+              <div class="line">
+                <strong>${key}</strong>: ${value} ${comparison ? `<span class="${compClass}">(${comparison})</span>` : ""}
+              </div>
+            `;
+          }
+        }
 
         return `
           <div class="label-container">
@@ -228,12 +222,9 @@
 
       fetch(`api.php?${param}=` + encodeURIComponent(value))
         .then(res => res.json())
-        .then(json => {
-          displayNutrition(json);
-        })
+        .then(json => displayNutrition(json))
         .catch(err => {
           resultDiv.innerHTML = `<p>❌ Gagal memuat data: ${err.message}</p>`;
-          console.error("Detail error:", err);
         });
     }
 
@@ -255,10 +246,34 @@
       fetchNutrition('nama', name);
     }
 
+    async function tryOCR() {
+      const video = document.getElementById('ocr-video');
+      const canvas = document.getElementById('ocr-canvas');
+      const context = canvas.getContext('2d');
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = canvas.toDataURL("image/png");
+
+      const result = await Tesseract.recognize(
+        imageData,
+        'eng',
+        { logger: m => console.log(m) }
+      );
+
+      const text = result.data.text;
+      const match = text.match(/\d{8,13}/);
+      if (match) {
+        fetchNutrition('barcode', match[0]);
+      } else {
+        resultDiv.innerHTML = "<p>❌ Tidak dapat mengenali angka barcode melalui OCR.</p>";
+      }
+    }
+
     function startScan() {
       if (isScanning) return;
       isScanning = true;
-
       html5QrCode = new Html5Qrcode("reader");
 
       Html5Qrcode.getCameras().then(cameras => {
@@ -290,9 +305,27 @@
               });
             },
             (error) => {
-              // silent scan error
+              // silent error
             }
           );
+
+          // juga tampilkan video untuk OCR
+          navigator.mediaDevices.getUserMedia({ video: { deviceId: currentCameraId } })
+            .then(stream => {
+              const videoElement = document.getElementById("ocr-video");
+              videoElement.srcObject = stream;
+              videoElement.onloadedmetadata = () => {
+                videoElement.play();
+                setTimeout(() => {
+                  if (isScanning) {
+                    html5QrCode.stop().then(() => {
+                      isScanning = false;
+                      tryOCR();
+                    });
+                  }
+                }, 5000); // OCR dijalankan setelah 5 detik
+              };
+            });
         } else {
           resultDiv.innerHTML = "<p>❌ Kamera tidak tersedia.</p>";
         }
