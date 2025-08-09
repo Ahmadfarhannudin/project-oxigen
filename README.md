@@ -1,6 +1,6 @@
 <!-- HEADER ANIMASI -->
 <p align="center">
-  <img src="public/assets/gambar/elaina.gif" alt="Anime GIF" width="300" />
+  <img src="public/assets/gambar/elaina.gif" alt="Anime GIF" width="800" />
 </p>
 
 
@@ -91,6 +91,7 @@ Project ini dikembangkan untuk Event SuperGame 2 dan bersifat non-commercial.
 
 
 # Aktifkan Apache dan MySQL
+
 
 
 
