@@ -199,7 +199,7 @@
       <!-- Card 5 -->
       <div class="col-md-4">
         <div class="card-custom">
-          <img src="img/otot-bahu.jpg" alt="Otot Bahu">
+          <img src="5.jpg" alt="Otot Bahu">
           <div class="card-text">OTOT BAHU</div>
         </div>
       </div>
@@ -207,7 +207,7 @@
       <!-- Card 6 -->
       <div class="col-md-4">
         <div class="card-custom">
-          <img src="img/otot-kaki.jpg" alt="Otot Kaki">
+          <img src="6.jpg" alt="Otot Kaki">
           <div class="card-text">OTOT KAKI</div>
         </div>
       </div>
