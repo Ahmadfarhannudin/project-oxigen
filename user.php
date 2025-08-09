@@ -220,8 +220,8 @@
   <!-- PROCESSO -->
   <section class="container">
     <div class="processo text-center">
-      <h3>COMO FUNCIONA O NOSSO PROCESSO?</h3>
-      <p>Passo 1: Análise física<br>Passo 2: Plano personalizado</p>
+      <h3>Coming Soon</h3>
+      <p>StayTune Untuk fitur Selanjutnya cuyyyyyy</p>
     </div>
   </section>
 
