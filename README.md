@@ -1,6 +1,6 @@
 <!-- HEADER ANIMASI -->
 <p align="center">
-  <img src="[https://readme-typing-svg.demolab.com?font=Orbitron&size=32&pause=1000&color=00F5FF&center=true&vCenter=true&width=800&lines=🏋️‍♂️+Project+Oxigen;Event+SuperGame+2;Aplikasi+Gym+Masa+Depan;Developed+by+Team+of+5+Legends](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F428264245823713534%2F&psig=AOvVaw1LqIhU9s-CBFNN_wuP2TfH&ust=1754823431787000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKixy7nI_Y4DFQAAAAAdAAAAABAL)" alt="Typing SVG" />
+  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F428264245823713534%2F&psig=AOvVaw1LqIhU9s-CBFNN_wuP2TfH&ust=1754823431787000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKixy7nI_Y4DFQAAAAAdAAAAABAL" alt="Typing SVG" />
 </p>
 
 <!-- BADGES -->
@@ -89,6 +89,7 @@ Project ini dikembangkan untuk Event SuperGame 2 dan bersifat non-commercial.
 
 
 # Aktifkan Apache dan MySQL
+
 
 
 
