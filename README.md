@@ -1,6 +1,6 @@
 ---
 
-<center> # 💪 **Gym ZULLxZALL** </center>
+# 💪 **Gym ZULLxZALL**
 
 <!-- HEADER ANIMASI -->
 <p align="center">
