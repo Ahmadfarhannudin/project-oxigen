@@ -1,7 +1,8 @@
 <!-- HEADER ANIMASI -->
 <p align="center">
-  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fsearch%2Fsad-anime-gifs&psig=AOvVaw1kkrw3b1qGFiGhw9Z_C78n&ust=1754823661739000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKC666bJ_Y4DFQAAAAAdAAAAABAE" alt="Typing GIF" />
+  <img src="public/assets/gambar/elaina.gif" alt="Anime GIF" width="300" />
 </p>
+
 
 
 <!-- BADGES -->
