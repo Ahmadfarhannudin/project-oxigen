@@ -1,6 +1,6 @@
 ---
 
-<h1>**Gym ZULLxZALL**</h1>
+**Gym ZULLxZALL**
 
 <!-- HEADER ANIMASI -->
 <p align="center">
@@ -125,6 +125,7 @@ mv project-oxigen C:/xampp/htdocs/
 # Buat database baru lalu import file .sql yang ada di folder database
 
 # 4. Jalankan XAMPP (Apache & MySQL)
+
 
 
 
