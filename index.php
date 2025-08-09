@@ -1,3 +1,7 @@
+<?php
+require_once  'config/config.php';
+if (!isset($_SESSION['user_id'])) { header('Location: public/auth/login.php'); exit; }
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -114,7 +118,7 @@
   </style>
 </head>
 <body>
-
+<a href="./process/logout.php" class="btn btn-outline-secondary">Logout</a>
   <h2>📷 Scan Barcode Produk</h2>
   <div id="reader"></div>
   <video id="ocr-video" width="300" autoplay muted playsinline></video>
@@ -130,7 +134,7 @@
   <button onclick="searchByName()">🔍 Cari Nama</button>
 
   <div id="result"></div>
-  <button id="scan-again" onclick="restartScan()" style="display:none;">🔄 Scan Ulang</button>
+  <button id="scan-again" onclick="restartScan()" style="display:none;"><a href="./process/logout.php" class="btn btn-outline-secondary">Logout</a></button>
 
   <script>
     const resultDiv = document.getElementById('result');
