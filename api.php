@@ -34,28 +34,49 @@ function search_openfood($barcode) {
 }
 
 function search_openfood_by_name($name) {
-    $url = "https://world.openfoodfacts.org/cgi/search.pl?search_terms=" . urlencode($name) . "&search_simple=1&action=process&json=1&page_size=10";
-    $res = @file_get_contents($url);
-    if (!$res) return [];
+    $matches = [];
+    $keyword = strtolower(trim($name));
+    $page_size = 1000; // Batas aman per request
+    $page = 1;
 
-    $data = json_decode($res, true);
-    if (isset($data['products']) && is_array($data['products']) && count($data['products']) > 0) {
-        $keyword = strtolower(trim($name));
-        $matches = [];
+    while (true) {
+        $url = "https://world.openfoodfacts.org/cgi/search.pl?" . http_build_query([
+            'search_terms' => $name,
+            'search_simple' => 1,
+            'action' => 'process',
+            'json' => 1,
+            'page_size' => $page_size,
+            'page' => $page
+        ]);
+
+        $res = @file_get_contents($url);
+        if (!$res) break;
+
+        $data = json_decode($res, true);
+
+        if (empty($data['products']) || !is_array($data['products'])) {
+            break;
+        }
 
         foreach ($data['products'] as $product) {
             $product_name = strtolower($product['product_name'] ?? '');
-            if (strpos($product_name, $keyword) !== false || empty($keyword)) {
+            if (strpos($product_name, $keyword) !== false || $keyword === '') {
                 $matches[] = $product;
             }
         }
 
-        // Jika tidak ada yang cocok, kembalikan semua produk hasil pencarian
-        return count($matches) > 0 ? $matches : $data['products'];
+        // Kalau sudah sampai halaman terakhir
+        if (count($data['products']) < $page_size) {
+            break;
+        }
+
+        $page++;
     }
 
-    return [];
+    return $matches;
 }
+
+
 
 
 function parse_openfood_nutrients($product) {
