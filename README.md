@@ -16,7 +16,7 @@
 ---
 
 ## 💪 Tentang Project Oxigen
-**Project Oxigen** adalah aplikasi gym modern berbasis **PHP Native** yang dikembangkan untuk **Event SuperGame 2**.  
+**Gym ZULLxZALL** adalah aplikasi gym modern berbasis **PHP Native** yang dikembangkan untuk **Event PXIGEN SuperGame 2**.  
 Aplikasi ini memudahkan pengguna untuk:
 - Melacak latihan harian dan progres kebugaran. (coming soon)
 - Mengakses video tutorial interaktif. (coming soon)
@@ -91,6 +91,7 @@ Project ini dikembangkan untuk Event SuperGame 2 dan bersifat non-commercial.
 
 
 # Aktifkan Apache dan MySQL
+
 
 
 
