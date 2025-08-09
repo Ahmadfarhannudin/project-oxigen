@@ -1,0 +1,5 @@
+/* simple aesthetic tweaks */
+body { background:#f5f7fb; }
+.card { border-radius: 12px; box-shadow: 0 6px 20px rgba(22,30,50,0.08); }
+.logo { font-weight:700; color:#2b6cb0; }
+.form-footer { font-size:14px; color:#6b7280; }
