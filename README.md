@@ -18,19 +18,19 @@
 ## 💪 Tentang Project Oxigen
 **Project Oxigen** adalah aplikasi gym modern berbasis **PHP Native** yang dikembangkan untuk **Event SuperGame 2**.  
 Aplikasi ini memudahkan pengguna untuk:
-- Melacak latihan harian dan progres kebugaran.
-- Mengakses video tutorial interaktif.
-- Mendapatkan jadwal latihan yang dipersonalisasi.
-- Memantau nutrisi dan asupan kalori.
-
+- Melacak latihan harian dan progres kebugaran. (coming soon)
+- Mengakses video tutorial interaktif. (coming soon)
+- Mendapatkan jadwal latihan yang dipersonalisasi. (coming soon)
+- Memantau nutrisi dan asupan kalori. (coming soon)
+- Scan barcode makanan dan minuman. 
 ---
 
 ## 🚀 Fitur Unggulan
-- 📅 **Scheduler Pintar** – Rekomendasi jadwal latihan sesuai target.
-- 🎥 **Video Trainer** – Panduan latihan berbasis video.
-- 📊 **Progress Tracker** – Grafik perkembangan performa.
-- 🥗 **Nutrisi Terintegrasi** – Kalkulator kalori & makronutrien.
-- 🌐 **Mode Online & Offline** – Bisa diakses kapan saja.
+- 📅 **Scheduler Pintar** – Rekomendasi jadwal latihan sesuai target. (coming soon)
+- 🎥 **Video Trainer** – Panduan latihan berbasis video. (coming soon)
+- 📊 **Progress Tracker** – Grafik perkembangan performa. (coming soon)
+- 🥗 **Nutrisi Terintegrasi** – Kalkulator kalori (coming soon) & scan barcode makanan dan minuman.
+- 🌐 **Mode Online** – Bisa diakses kapan saja.
 
 ---
 
@@ -91,6 +91,7 @@ Project ini dikembangkan untuk Event SuperGame 2 dan bersifat non-commercial.
 
 
 # Aktifkan Apache dan MySQL
+
 
 
 
