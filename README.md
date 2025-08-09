@@ -1,7 +1,8 @@
 <!-- HEADER ANIMASI -->
 <p align="center">
-  <img src="[https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F428264245823713534%2F&psig=AOvVaw1LqIhU9s-CBFNN_wuP2TfH&ust=1754823431787000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKixy7nI_Y4DFQAAAAAdAAAAABAL](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpapers-clan.com%2Fdesktop-wallpapers%2Fnezuko-glowing-eyes-demon-slayer-gif-desktop%2F&psig=AOvVaw1LqIhU9s-CBFNN_wuP2TfH&ust=1754823431787000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKixy7nI_Y4DFQAAAAAdAAAAABAo)" alt="Typing SVG" />
+  <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Typing GIF" />
 </p>
+
 
 <!-- BADGES -->
 <p align="center">
@@ -89,6 +90,7 @@ Project ini dikembangkan untuk Event SuperGame 2 dan bersifat non-commercial.
 
 
 # Aktifkan Apache dan MySQL
+
 
 
 
