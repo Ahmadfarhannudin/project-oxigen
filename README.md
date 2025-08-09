@@ -53,7 +53,7 @@
 > _"Fitness is not about being better than someone else. It’s about being better than you used to be."_  
 > — Unknown
 
-**Gym ZULLxZALL** adalah aplikasi gym modern berbasis **PHP Native** yang dikembangkan untuk **Event PXIGEN SuperGame 2**.  
+**Gym ZULLxZALL** adalah aplikasi gym modern berbasis **PHP Native** yang dikembangkan untuk **Event OXIGEN SuperGame 2**.  
 Aplikasi ini bertujuan membantu pengguna mengelola latihan, nutrisi, dan progres kebugaran secara efektif dan menyenangkan!
 
 ### Apa yang bisa kamu lakukan?
@@ -125,6 +125,7 @@ mv project-oxigen C:/xampp/htdocs/
 # Buat database baru lalu import file .sql yang ada di folder database
 
 # 4. Jalankan XAMPP (Apache & MySQL)
+
 
 
 
