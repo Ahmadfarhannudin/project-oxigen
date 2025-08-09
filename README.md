@@ -1,3 +1,7 @@
+---
+
+# 💪 **Gym ZULLxZALL**
+
 <!-- HEADER ANIMASI -->
 <p align="center">
   <img src="public/assets/gambar/elaina.gif" alt="Anime GIF" width="500" />
@@ -121,3 +125,4 @@ mv project-oxigen C:/xampp/htdocs/
 # Buat database baru lalu import file .sql yang ada di folder database
 
 # 4. Jalankan XAMPP (Apache & MySQL)
+
