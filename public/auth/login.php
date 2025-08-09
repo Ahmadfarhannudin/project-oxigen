@@ -1,40 +1,109 @@
 <?php require_once __DIR__ . '/../../config/config.php'; ?>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"><title>Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/css/custom.css" rel="stylesheet">
+	<title>Login V1</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/animate/animate.css">	
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+	<!-- SweetAlert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-5">
-      <div class="card p-4">
-        <h4 class="mb-3">Masuk</h4>
-        <?php if($m=get_flash('success')): ?>
-          <div class="alert alert-success"><?= htmlspecialchars($m) ?></div>
-        <?php endif; ?>
-        <?php if($m=get_flash('error')): ?>
-          <div class="alert alert-danger"><?= htmlspecialchars($m) ?></div>
-        <?php endif; ?>
-        <form action="../../process/login.php" method="post">
-          <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input name="email" type="email" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input name="password" type="password" class="form-control" required>
-          </div>
-          <button class="btn btn-primary w-100">Login</button>
-        </form>
-        <div class="mt-3 text-center">
-          <a href="forgot_password.php">Lupa password?</a> • <a href="register.php">Daftar</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="../assets/gambar/gym.png" alt="IMG">
+				</div>
+
+				<form action="../../process/login.php" method="post">
+					<span class="login100-form-title">
+						Member Login
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" name="email" type="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="#">
+							Username / Password?
+						</a>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="register.php">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../assets/vendor/select2/select2.min.js"></script>
+	<script src="../assets/vendor/tilt/tilt.jquery.min.js"></script>
+	<script>
+		$('.js-tilt').tilt({ scale: 1.1 })
+	</script>
+	<script src="js/main.js"></script>
+
+	<?php if ($msg = get_flash('success')): ?>
+	<script>
+		Swal.fire({
+			icon: 'success',
+			title: 'Berhasil!',
+			text: '<?= addslashes($msg) ?>',
+			timer: 2000,
+			showConfirmButton: false
+		});
+	</script>
+	<?php endif; ?>
+
+	<?php if ($msg = get_flash('error')): ?>
+	<script>
+		Swal.fire({
+			icon: 'error',
+			title: 'Gagal!',
+			text: '<?= addslashes($msg) ?>',
+			timer: 2500,
+			showConfirmButton: false
+		});
+	</script>
+	<?php endif; ?>
 </body>
 </html>

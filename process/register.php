@@ -1,5 +1,4 @@
 <?php
-// process/register.php
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/mail.php';
 
@@ -11,22 +10,30 @@ $confirmPwd = trim($_POST['confirm_password'] ?? '');
 
 // Validasi input
 if (!$username || !$fullname || !$email || !$password || !$confirmPwd) {
-    die('Semua field wajib diisi.');
+    set_flash('error', 'Semua field wajib diisi.');
+    header('Location: ../public/auth/register.php');
+    exit;
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    die('Format email tidak valid.');
+    set_flash('error', 'Format email tidak valid.');
+    header('Location: ../public/auth/register.php');
+    exit;
 }
 
 if ($password !== $confirmPwd) {
-    die('Password dan konfirmasi password tidak sama.');
+    set_flash('error', 'Password dan konfirmasi password tidak sama.');
+    header('Location: ../public/auth/register.php');
+    exit;
 }
 
 // Cek email atau username sudah ada
 $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR username = ? LIMIT 1");
 $stmt->execute([$email, $username]);
 if ($stmt->fetch()) {
-    die('Username atau email sudah terdaftar.');
+    set_flash('error', 'Username atau email sudah terdaftar.');
+    header('Location: ../public/auth/register.php');
+    exit;
 }
 
 // Simpan user baru
@@ -50,7 +57,9 @@ $htmlBody = "<p>Halo <b>$fullname</b>,</p>
 $plainBody = "Halo $fullname,\n\nKode OTP kamu adalah: $otp\nBerlaku 5 menit.";
 
 if (!sendEmail($email, $subject, $htmlBody, $plainBody)) {
-    die('Gagal mengirim email OTP.');
+    set_flash('error', 'Gagal mengirim email OTP.');
+    header('Location: ../public/auth/register.php');
+    exit;
 }
 
 // Simpan email ke session untuk proses verifikasi
@@ -59,4 +68,3 @@ $_SESSION['pending_email'] = $email;
 // Redirect ke halaman verifikasi OTP
 header('Location: ../public/auth/verify_otp.php');
 exit;
- 
