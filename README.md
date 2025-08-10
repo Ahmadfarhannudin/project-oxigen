@@ -48,7 +48,7 @@
 
 ---
 
-# 💪 Tentang **Gym FitForgeL**
+# 💪 Tentang **Gym FitForge**
 
 > _"Fitness is not about being better than someone else. It’s about being better than you used to be."_  
 > — Unknown
@@ -75,7 +75,8 @@ Aplikasi ini bertujuan membantu pengguna mengelola latihan, nutrisi, dan progres
 | 📊 Progress Tracker      | Grafik perkembangan performa _(coming soon)_            |
 | 🥗 Nutrisi Terintegrasi  | Kalkulator kalori & scan barcode makanan/minuman        |
 | 🌐 Mode Online           | Akses aplikasi kapan saja                              |
-| 🔒 Autentikasi Google    | Login dengan akun Google (OAuth 2.0)                   |
+| 🔒 Autentikasi Login PHP Mailer | Login dengan email yang aktif dengan auth otp          |     
+| 🔒 Autentikasi Google    | Login dengan akun Google (OAuth 2.0)  _(coming soon)_  |
 
 ---
 
@@ -125,6 +126,7 @@ mv project-oxigen C:/xampp/htdocs/
 # Buat database baru lalu import file .sql yang ada di folder database
 
 # 4. Jalankan XAMPP (Apache & MySQL)
+
 
 
 
