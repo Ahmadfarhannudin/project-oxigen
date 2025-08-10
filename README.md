@@ -1,6 +1,6 @@
 ---
 
-# **Gym ZULLxZALL**
+# **Gym FitForge**
 
 <!-- HEADER ANIMASI -->
 <p align="center">
@@ -48,7 +48,7 @@
 
 ---
 
-# 💪 Tentang **Gym ZULLxZALL**
+# 💪 Tentang **Gym FitForgeL**
 
 > _"Fitness is not about being better than someone else. It’s about being better than you used to be."_  
 > — Unknown
@@ -125,6 +125,7 @@ mv project-oxigen C:/xampp/htdocs/
 # Buat database baru lalu import file .sql yang ada di folder database
 
 # 4. Jalankan XAMPP (Apache & MySQL)
+
 
 
 
